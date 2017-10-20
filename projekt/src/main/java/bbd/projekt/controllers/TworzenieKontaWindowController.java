@@ -1,12 +1,10 @@
 package bbd.projekt.controllers;
 
-import java.io.IOException;
-
+import bbd.projekt.utils.FxmlUtils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
 
 public class TworzenieKontaWindowController {
+  private static final String LOGIN_WINDOW_FXML = "/FXML/LoginWindow.fxml";
   StartWindowController startWindowController;
 
   public void setStartWindowController(StartWindowController startWindowController) {
@@ -15,17 +13,8 @@ public class TworzenieKontaWindowController {
   
   @FXML
   public void zalozKonto() {
-    FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/LoginWindow.fxml"));
-    AnchorPane anchorPane = null;
-    
-    try {
-      anchorPane = loader.load();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    startWindowController.startPane.getChildren().clear();
-    startWindowController.startPane.getChildren().add(anchorPane);
-    LoginWindowController loginWindowController = loader.getController();
+    LoginWindowController loginWindowController =
+        (LoginWindowController) FxmlUtils.loadFXML(LOGIN_WINDOW_FXML, startWindowController.startPane);
     loginWindowController.setStartWindowController(startWindowController);
   }
 }

@@ -1,9 +1,8 @@
 package bbd.projekt;
 
+import bbd.projekt.utils.FxmlUtils;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -11,17 +10,18 @@ import javafx.stage.Stage;
  *
  */
 public class App extends Application {
+  private static final String START_WINDOW_FXML = "/FXML/StartWindow.fxml";
+
   public static void main(String[] args) {
     launch(args);
   }
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    StackPane stackPane = FXMLLoader.load(this.getClass().getResource("/FXML/StartWindow.fxml"));
-    Scene scene = new Scene(stackPane);
+    Scene scene = new Scene(FxmlUtils.loadFXML(START_WINDOW_FXML));
     primaryStage.setResizable(false);
     primaryStage.setScene(scene);
-    primaryStage.setTitle("Projekt BBD");
+    primaryStage.setTitle(FxmlUtils.getString("aplikacja.tytul"));
     primaryStage.show();
   }
 }

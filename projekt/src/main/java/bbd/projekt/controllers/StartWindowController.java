@@ -1,14 +1,12 @@
 package bbd.projekt.controllers;
 
-import java.io.IOException;
-
+import bbd.projekt.utils.FxmlUtils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 public class StartWindowController {
   
+  private static final String LOGIN_WINDOW_FXML = "/FXML/LoginWindow.fxml";
   @FXML
   StackPane startPane;
 
@@ -17,15 +15,7 @@ public class StartWindowController {
   }
   
   public void initialize() {
-    AnchorPane anchorPane = null;
-    FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/FXML/LoginWindow.fxml"));
-    try {
-      anchorPane = loader.load();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    LoginWindowController loginWindowController = loader.getController();
+    LoginWindowController loginWindowController = (LoginWindowController) FxmlUtils.loadFXML(LOGIN_WINDOW_FXML, startPane);
     loginWindowController.setStartWindowController(this);
-    startPane.getChildren().add(anchorPane);
   }
 }
