@@ -22,15 +22,15 @@ public class LoginWindowController {
   
   @FXML
   public void zaloguj() {
-    startWindowController.startPane.getChildren().clear();
-    startWindowController.startPane.getChildren().add(FxmlUtils.loadFXML(MAIN_WINDOW_FXML));
+    MainWindowController mainWindowController = (MainWindowController) FxmlUtils.getController(MAIN_WINDOW_FXML, startWindowController.startPane);
+    mainWindowController.setStartWindowController(startWindowController);
   }
   
   @FXML
   public void tworzenieKonta() {
 
     TworzenieKontaWindowController tworzenieKontaWindowController = 
-        (TworzenieKontaWindowController) FxmlUtils.loadFXML(TWORZENIE_KONTA_WINDOW_FXML,startWindowController.startPane);
+        (TworzenieKontaWindowController) FxmlUtils.getController(TWORZENIE_KONTA_WINDOW_FXML,startWindowController.startPane);
     
     tworzenieKontaWindowController.setStartWindowController(startWindowController);
   }

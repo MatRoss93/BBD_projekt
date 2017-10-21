@@ -15,7 +15,7 @@ public class StartWindowController {
   }
   
   public void initialize() {
-    LoginWindowController loginWindowController = (LoginWindowController) FxmlUtils.loadFXML(LOGIN_WINDOW_FXML, startPane);
+    LoginWindowController loginWindowController = (LoginWindowController) FxmlUtils.getController(LOGIN_WINDOW_FXML, startPane);
     loginWindowController.setStartWindowController(this);
   }
 }

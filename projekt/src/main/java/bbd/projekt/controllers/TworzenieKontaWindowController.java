@@ -14,7 +14,7 @@ public class TworzenieKontaWindowController {
   @FXML
   public void zalozKonto() {
     LoginWindowController loginWindowController =
-        (LoginWindowController) FxmlUtils.loadFXML(LOGIN_WINDOW_FXML, startWindowController.startPane);
+        (LoginWindowController) FxmlUtils.getController(LOGIN_WINDOW_FXML, startWindowController.startPane);
     loginWindowController.setStartWindowController(startWindowController);
   }
 }

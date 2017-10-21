@@ -12,6 +12,12 @@ public class FxmlUtils {
     return ResourceBundle.getBundle("bundles.Application");
   }
   
+  /**
+   * Zwraca Pane z fxmlPath
+   * @param fxmlPath
+   * @return
+   */
+  
   public static Pane loadFXML(String fxmlPath) {
     
     FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
@@ -24,7 +30,14 @@ public class FxmlUtils {
     return null;
   }
   
-  public static Object loadFXML(String fxmlPath, StackPane startPane) {
+/**
+ * Dodaje fxml z fxmlPath do startPane i zwraca jego controller
+ * @param fxmlPath
+ * @param startPane
+ * @return
+ */
+
+  public static Object getController(String fxmlPath, StackPane startPane) {
     
     FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
     loader.setResources(getResourceBundle());
@@ -38,19 +51,12 @@ public class FxmlUtils {
     startPane.getChildren().add(pane);
     return loader.getController();
   }
-
-  public static Object getController(String fxmlPath) {
-    FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
-    loader.setResources(getResourceBundle());
-    try {
-      Pane pane = loader.load();
-      return loader.getController();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
   
+  /**
+   * Zwraca wartość dla podanego klucza z pliku Application.properties
+   * @param key
+   * @return
+   */
   public static String getString(String key) {
     return getResourceBundle().getString(key);
   }
