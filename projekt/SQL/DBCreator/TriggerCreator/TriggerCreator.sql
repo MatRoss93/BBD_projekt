@@ -89,3 +89,11 @@ BEGIN
         SET NEW.DTWO = now();
     END IF;
 END
+/
+CREATE TRIGGER MST_DTWO
+BEFORE INSERT ON MST FOR EACH ROW
+BEGIN
+    IF (NEW.DTWO IS NULL) THEN -- change the isnull check for the default used
+        SET NEW.DTWO = now();
+    END IF;
+END
