@@ -134,8 +134,6 @@ CREATE TABLE MST
 (
 	NMST INT NOT NULL AUTO_INCREMENT COMMENT 'Klucz główny',
 	MSTO VARCHAR(40) NOT NULL COMMENT 'Nazwa miejscowości',
-	DTWO DATETIME NOT NULL COMMENT 'Data dodania',
-	DAKT TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT 'Data aktualizacji',
 	PRIMARY KEY(NMST)
 );
 /
