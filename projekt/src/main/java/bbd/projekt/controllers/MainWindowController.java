@@ -1,9 +1,13 @@
 package bbd.projekt.controllers;
 
+import java.util.Optional;
+
+import bbd.projekt.dialogs.DialogsBoxes;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.stage.Stage;
 
@@ -22,8 +26,11 @@ public class MainWindowController {
   
   @FXML
   public void zamknij() {
-    Platform.exit();
-    System.exit(0);
+	Optional<ButtonType> result = DialogsBoxes.confirmCloseApplication();
+	if(result.get()==ButtonType.OK) {
+		Platform.exit();
+		System.exit(0);
+	}
   }
   
   @FXML
@@ -44,7 +51,7 @@ public class MainWindowController {
   
   @FXML
   public void oAplikacji() {
-    
+    DialogsBoxes.dialogAboutApplication();
   }
   
   

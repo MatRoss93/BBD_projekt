@@ -1,5 +1,7 @@
 package bbd.projekt;
 
+//import java.util.ResourceBundle;
+
 import bbd.projekt.utils.FxmlUtils;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -19,6 +21,7 @@ public class App extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
     Scene scene = new Scene(FxmlUtils.loadFXML(START_WINDOW_FXML));
+    /* ResourceBundle bundle = ResourceBundle.getBundle("bundles.Application_pl_PL"); */ 
     primaryStage.setResizable(false);
     primaryStage.setScene(scene);
     primaryStage.setTitle(FxmlUtils.getString("aplikacja.tytul"));
