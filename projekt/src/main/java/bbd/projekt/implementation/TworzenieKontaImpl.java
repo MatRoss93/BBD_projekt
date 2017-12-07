@@ -1,5 +1,6 @@
 package bbd.projekt.implementation;
 
+import java.awt.Component;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -9,8 +10,15 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JToolBar.Separator;
+
 import bbd.projekt.database.SqlManager;
 import bbd.projekt.utils.FxmlUtils;
+import bbd.projekt.utils.PassHash;
+import bbd.projekt.utils.PassHash.CannotPerformOperationException;
 
 public class TworzenieKontaImpl {
   
@@ -25,6 +33,7 @@ public class TworzenieKontaImpl {
     if (login.equals(null) || 
         login.length() < 5 || 
         login.length() > 15) {
+    	
       listaBledow.add(FxmlUtils.getString("tworzenie.konta.blad.login.ilosc"));
     }
     if (login.equals(null) || 
@@ -46,8 +55,20 @@ public class TworzenieKontaImpl {
     if (!haslo.equals(haslo2)) {
       listaBledow.add(FxmlUtils.getString("tworzenie.konta.blad.haslo2"));      
     }
+    
     if (listaBledow == null || listaBledow.isEmpty()) {
+      try {
+		haslo = PassHash.createHash(haslo);
+      } catch (CannotPerformOperationException e) {
+		e.printStackTrace();
+      }
       dodajUrzytkownika(login,haslo,null,null,"P");
+    } else {
+    	String listString = "";
+    	for (String s : listaBledow) {
+    		listString += s +"\n";
+    	}
+    	JOptionPane.showMessageDialog(null, listString);
     }
     return listaBledow;
   }

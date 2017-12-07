@@ -26,4 +26,5 @@ public class DialogsBoxes {
 		Optional<ButtonType> result = confirmationDialog.showAndWait();
 		return result;
 	}
+	
 }
