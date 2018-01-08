@@ -32,13 +32,16 @@ public class TworzenieKontaWindowController {
   
   @FXML
   Button utworz;
+
   
   public TworzenieKontaWindowController() {
-
+    if (kontekstBezpieczenstwa == null) {
+      kontekstBezpieczenstwa = new KontekstBezpieczenstwa();
+    }
   }
   
   public void initialize() {
-    if (KontekstBezpieczenstwa.getUprawnienia() != Uprawnienia.ADMINISTRATOR) {
+    if (kontekstBezpieczenstwa.getUprawnienia() != Uprawnienia.ADMINISTRATOR) {
       uprawnienia.setDisable(true);
       uprawnienia.setVisible(false);
     } else {
@@ -54,12 +57,26 @@ public class TworzenieKontaWindowController {
   @FXML
   public void zalozKonto() {
     List<String> listaBledow = tworzenieKontaClient.utworzKonto(login.getCharacters().toString(), haslo.getCharacters().toString(), haslo2.getCharacters().toString());
-    if (listaBledow.isEmpty()) {
-      LoginWindowController loginWindowController =
-          (LoginWindowController) FxmlUtils.getController(LOGIN_WINDOW_FXML, startWindowController.startPane);
-      loginWindowController.setStartWindowController(startWindowController);      
+    if (listaBledow.isEmpty()) {   
+      powrotDoOknaLogowania();
     }
   }
   
+  @FXML
+  public void powrot() {
+    powrotDoOknaLogowania();
+  }
+  
+  public void powrotDoOknaLogowania() {
+    LoginWindowController loginWindowController =
+        (LoginWindowController) FxmlUtils.getController(LOGIN_WINDOW_FXML, startWindowController.startPane);
+    loginWindowController.setStartWindowController(startWindowController);  
+  }
+  public KontekstBezpieczenstwa getKontekstBezpieczenstwa() {
+    return kontekstBezpieczenstwa;
+  }
 
+  public void setKontekstBezpieczenstwa(KontekstBezpieczenstwa kontekstBezpieczenstwa) {
+    this.kontekstBezpieczenstwa = kontekstBezpieczenstwa;
+  }
 }

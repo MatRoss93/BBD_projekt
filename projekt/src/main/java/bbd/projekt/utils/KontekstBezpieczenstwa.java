@@ -3,33 +3,60 @@ package bbd.projekt.utils;
 import java.util.Date;
 
 public class KontekstBezpieczenstwa {
-  private static Uprawnienia uprawnienia;
-  private static String login;
-  private static Date godzinaLogowania;
+  private Uprawnienia uprawnienia;
+  private String login;
+  private Date godzinaLogowania;
   
   public KontekstBezpieczenstwa() {
   }
   
-  public static Uprawnienia getUprawnienia() {
+  public Uprawnienia getUprawnienia() {
     return uprawnienia;
   }
-  public static void setUprawnienia(Uprawnienia uprawnienia) {
-    KontekstBezpieczenstwa.uprawnienia = uprawnienia;
+  public void setUprawnienia(Uprawnienia uprawnienia) {
+    this.uprawnienia = uprawnienia;
   }
-  public static String getLogin() {
+  public String getLogin() {
     return login;
   }
-  public static void setLogin(String login) {
-    KontekstBezpieczenstwa.login = login;
+  public void setLogin(String login) {
+    this.login = login;
   }
-  public static Date getGodzinaLogowania() {
+  public Date getGodzinaLogowania() {
     return godzinaLogowania;
   }
-  public static void setGodzinaLogowania(Date godzinaLogowania) {
-    KontekstBezpieczenstwa.godzinaLogowania = godzinaLogowania;
+  public void setGodzinaLogowania(Date godzinaLogowania) {
+    this.godzinaLogowania = godzinaLogowania;
   }
-  
-  
+  public static KontekstBezpieczenstwa setZalogowany(String login, String uprw) {
+    KontekstBezpieczenstwa kb = new KontekstBezpieczenstwa();
+    kb.setLogin(login);
+    switch (uprw) {
+      case "A":
+        kb.setUprawnienia(Uprawnienia.ADMINISTRATOR);
+        break;
+      case "P":
+        kb.setUprawnienia(Uprawnienia.PACJENT);
+        break;
+      case "R":
+        kb.setUprawnienia(Uprawnienia.RECEPCJA);
+        break;
+      case "L":
+        kb.setUprawnienia(Uprawnienia.LEKARZ);
+        break;
+      default:
+        kb.setUprawnienia(Uprawnienia.NA);
+        break;
+    }
+    kb.setGodzinaLogowania(new Date());
+    return kb;
+  }
 
+  public boolean poprawnyKB() {
+    if (this.godzinaLogowania != null && this.login != null && this.uprawnienia != null && !this.uprawnienia.equals(Uprawnienia.NA)) {
+      return true;
+    }
+    return false;
+  }
   
 }

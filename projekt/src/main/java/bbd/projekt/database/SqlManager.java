@@ -17,22 +17,18 @@ public class SqlManager {
   private static final String USERNAME = "25678166_0000001";
   private static final String PASSWORD = "Monocentropus1";
 
-  private Connection connection;
-  private PreparedStatement statement;
+  private Connection connection = null;
+  private PreparedStatement statement = null;
   
   public SqlManager() {
-    try {
-      connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-    } catch (SQLException e) {
-      e.printStackTrace();
-      System.out.println("Połączenie z bazą nie działa!");
-    }
-    System.out.println("Połączenie z bazą działa!");
   }
   
   public PreparedStatement createQuery(String sql) {
-
+    
     try {
+      if (connection == null || connection.isClosed()) {
+        connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+      }
       statement = connection.prepareStatement(sql);
     } catch (SQLException e) {
       e.printStackTrace();
@@ -59,6 +55,9 @@ public class SqlManager {
       rs.close();
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      closeStatement();
+      closeConnection();
     }
     
     return map;
@@ -67,22 +66,41 @@ public class SqlManager {
   public Map<String, Object> getSingleResult(PreparedStatement statement) {
 
     ResultSet rs = null;
+    HashMap<String, Object> map = null;
     try {
       rs = statement.executeQuery();
       
       ResultSetMetaData md = rs.getMetaData();
       int columns = md.getColumnCount();
       if (rs.next()){
-        HashMap<String, Object> map = new HashMap<String,Object>(columns);
+         map = new HashMap<String,Object>(columns);
         for(int i = 1; i <= columns; i++){           
           map.put(md.getColumnName(i), rs.getObject(i));
         }
-        return map;
       }
       rs.close();
     } catch (SQLException e) {
       e.printStackTrace();
+    } finally {
+      closeStatement();
+      closeConnection();
     }
-    return null;
-  }  
+    return map;
+  }
+  
+  private void closeConnection() {
+    try {
+      connection.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+  
+  private void closeStatement() {
+    try {
+      statement.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 }

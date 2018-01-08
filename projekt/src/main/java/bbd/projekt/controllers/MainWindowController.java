@@ -3,6 +3,7 @@ package bbd.projekt.controllers;
 import java.util.Optional;
 
 import bbd.projekt.dialogs.DialogsBoxes;
+import bbd.projekt.utils.FxmlUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,7 +14,9 @@ import javafx.stage.Stage;
 
 public class MainWindowController {
 
-  StartWindowController startWindowController;
+  private static final String LOGIN_WINDOW_FXML = "/FXML/LoginWindow.fxml";
+  
+  private StartWindowController startWindowController;
 
   public void setStartWindowController(StartWindowController startWindowController) {
     this.startWindowController = startWindowController;
@@ -21,7 +24,7 @@ public class MainWindowController {
 
   @FXML
   public void wyloguj() {
-    
+    powrotDoOknaLogowania();
   }
   
   @FXML
@@ -54,7 +57,11 @@ public class MainWindowController {
     DialogsBoxes.dialogAboutApplication();
   }
   
-  
+  public void powrotDoOknaLogowania() {
+    LoginWindowController loginWindowController =
+        (LoginWindowController) FxmlUtils.getController(LOGIN_WINDOW_FXML, startWindowController.startPane);
+    loginWindowController.setStartWindowController(startWindowController);  
+  }
   
   
 }

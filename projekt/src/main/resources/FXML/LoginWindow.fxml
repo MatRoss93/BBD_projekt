@@ -15,8 +15,8 @@
    <children>
       <Label layoutX="100.0" layoutY="94.0" text="%login.login" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0" />
       <Label layoutX="103.0" layoutY="211.0" text="%login.haslo" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="200.0" />
-      <TextField layoutX="103.0" layoutY="120.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="120.0" />
-      <PasswordField layoutX="103.0" layoutY="220.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="220.0" />
+      <TextField fx:id="login" layoutX="103.0" layoutY="120.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="120.0" />
+      <PasswordField fx:id="haslo" layoutX="103.0" layoutY="220.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="220.0" />
       <Button layoutX="200.0" layoutY="275.0" mnemonicParsing="false" onAction="#zaloguj" text="%login.zaloguj" AnchorPane.leftAnchor="192.0" AnchorPane.topAnchor="275.0" />
       <Button layoutX="163.0" layoutY="317.0" mnemonicParsing="false" onAction="#tworzenieKonta" text="%login.utworz.konto" AnchorPane.leftAnchor="163.0" AnchorPane.topAnchor="317.0" />
       <CheckBox layoutX="103.0" layoutY="282.0" mnemonicParsing="false" text="%login.zapamietaj" />
