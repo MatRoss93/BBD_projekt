@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -66,18 +67,18 @@
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="480.0">
                                              <children>
                                                 <TextField fx:id="lekText" />
-                                                <Button mnemonicParsing="false" onAction="#szukajLekow" text="%lekarz.recepta.szukaj" />
+                                                <Button mnemonicParsing="false" onAction="#szukajLekow" text="%lekarz.szukaj" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
                                                 <ComboBox fx:id="lekList" prefWidth="150.0" />
-                                                <Button mnemonicParsing="false" onAction="#dodajDoRecepty" text="%lekarz.recepta.dodaj" />
+                                                <Button mnemonicParsing="false" onAction="#dodajDoRecepty" text="%lekarz.dodaj" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button mnemonicParsing="false" onAction="#zatwierdzRecepte" text="%lekarz.recepta.zatwierdz" />
+                                                <Button mnemonicParsing="false" onAction="#zatwierdzRecepte" text="%lekarz.zatwierdz" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -92,12 +93,54 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                              <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
                                  <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" />
-                                    <HBox prefHeight="100.0" prefWidth="200.0" />
+                                    <VBox prefHeight="165.0" prefWidth="354.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox prefHeight="55.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TextField fx:id="szukajSpecjalisty" />
+                                                      <ComboBox fx:id="specjalistaList" prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="55.0" prefWidth="80.0">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" onAction="#szukajSpecjalistow" text="%lekarz.szukaj" />
+                                                      <Button mnemonicParsing="false" onAction="#dodajSpecDoSkierowania" text="%lekarz.dodaj" />
+                                                   </children>
+                                                </VBox>
+                                                <Label prefHeight="55.0" prefWidth="70.0" text="%lekarz.skierowanie.specjalista" />
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox prefHeight="55.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TextField fx:id="szukajBadania" />
+                                                      <ComboBox fx:id="badanieList" prefWidth="150.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="55.0" prefWidth="80.0">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" onAction="#szukajBadan" text="%lekarz.szukaj" />
+                                                      <Button mnemonicParsing="false" onAction="#dodajBadDoSkierowania" text="%lekarz.dodaj" />
+                                                   </children>
+                                                </VBox>
+                                                <Label prefHeight="55.0" prefWidth="70.0" text="%lekarz.skierowanie.badanie" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="400.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#zatwierdzSkierowanie" text="%lekarz.zatwierdz" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <ListView fx:id="skierowanie" prefHeight="165.0" prefWidth="200.0" />
                                  </children>
-                              </VBox>
+                              </HBox>
                            </children></AnchorPane>
                   </content>
                 </Tab>

@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bbd.projekt.implementation.LekarzImpl;
+import bbd.projekt.interfaces.Badanie;
 import bbd.projekt.interfaces.Leki;
+import bbd.projekt.interfaces.Skierowanie;
+import bbd.projekt.interfaces.Specjalista;
 import bbd.projekt.interfaces.Termin;
 import bbd.projekt.utils.KontekstBezpieczenstwa;
 import javafx.fxml.FXML;
@@ -20,7 +23,9 @@ public class LekarzWindowController {
   private KontekstBezpieczenstwa kontekstBezpieczenstwa;
   private LekarzImpl lekarzClient;
   private List<Leki> receptaDoBazy;
-
+  private List<Skierowanie> skierowanieDoBazy;
+  
+  
   @FXML
   ComboBox<Termin> listaPacjentow;
   
@@ -45,6 +50,20 @@ public class LekarzWindowController {
   @FXML
   ComboBox<Leki> lekList;
   
+  @FXML
+  TextField szukajSpecjalisty;
+  
+  @FXML
+  ComboBox<Specjalista> specjalistaList;
+  
+  @FXML
+  TextField szukajBadania;
+  
+  @FXML
+  ComboBox<Badanie> badanieList;
+
+  @FXML
+  ListView skierowanie;
   
   public LekarzWindowController() {
     if (kontekstBezpieczenstwa == null) {
@@ -85,6 +104,32 @@ public class LekarzWindowController {
       public Leki fromString(String string) {
           return lekList.getItems().stream().filter(ap -> 
               ap.getNazwaLeku().equals(string)).findFirst().orElse(null);
+      }
+    });
+    specjalistaList.setConverter(new StringConverter<Specjalista>() {
+
+      @Override
+      public String toString(Specjalista specjalista) {
+        return specjalista.getNazwaSpecjalisty();
+      }
+
+      @Override
+      public Specjalista fromString(String string) {
+          return specjalistaList.getItems().stream().filter(ap -> 
+              ap.getNazwaSpecjalisty().equals(string)).findFirst().orElse(null);
+      }
+    });
+    badanieList.setConverter(new StringConverter<Badanie>() {
+
+      @Override
+      public String toString(Badanie badania) {
+        return badania.getNazwaBadania();
+      }
+
+      @Override
+      public Badanie fromString(String string) {
+          return badanieList.getItems().stream().filter(ap -> 
+              ap.getNazwaBadania().equals(string)).findFirst().orElse(null);
       }
     });
     
@@ -148,5 +193,50 @@ public class LekarzWindowController {
     lekarzClient.dodajRecepteDoBazy(receptaDoBazy, listaPacjentow.getValue());
   }
   
+  
+  @FXML
+  public void szukajSpecjalistow() {
+    specjalistaList.getItems().clear();
+    List<Specjalista> spec = lekarzClient.pobierzListeSpecjalistow(szukajSpecjalisty.getText());
+    for (Specjalista s : spec) {
+      specjalistaList.getItems().add(s);      
+    }
+  }
+  
+  @FXML
+  public void szukajBadan() {
+    badanieList.getItems().clear();
+    List<Badanie> bad = lekarzClient.pobierzListeBadan(szukajBadania.getText());
+    for (Badanie b : bad) {
+      badanieList.getItems().add(b);      
+    }
+  }
+  
+  @FXML
+  public void dodajSpecDoSkierowania() {
+    skierowanie.getItems().add(specjalistaList.getValue().getNazwaSpecjalisty());
+    if (skierowanieDoBazy == null) {
+      skierowanieDoBazy = new ArrayList<Skierowanie>();
+    }
+    Skierowanie s = new Skierowanie();
+    s.setIdSpecjalisty(specjalistaList.getValue().getIdSpecjalisty());
+    skierowanieDoBazy.add(s);
+  }
+  
+  @FXML
+  public void dodajBadDoSkierowania() {
+    skierowanie.getItems().add(badanieList.getValue().getNazwaBadania());
+    if (skierowanieDoBazy == null) {
+      skierowanieDoBazy = new ArrayList<Skierowanie>();
+    }
+    Skierowanie s = new Skierowanie();
+    s.setIdBadania(badanieList.getValue().getIdBadania());
+    skierowanieDoBazy.add(s);
+  }
+  
+  @FXML
+  public void zatwierdzSkierowanie() {
+    lekarzClient.dodajSkierowanieDoBazy(skierowanieDoBazy, listaPacjentow.getValue());
+  }
   
 }
