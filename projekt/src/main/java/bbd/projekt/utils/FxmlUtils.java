@@ -37,7 +37,7 @@ public class FxmlUtils {
  * @return
  */
 
-  public static Object getController(String fxmlPath, StackPane startPane) {
+  public static Object getController(String fxmlPath, Pane startPane) {
     
     FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
     loader.setResources(getResourceBundle());
