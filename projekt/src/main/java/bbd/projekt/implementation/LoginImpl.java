@@ -18,15 +18,10 @@ public class LoginImpl {
     sqlManager = new SqlManager();
     kontekstBezpieczenstwa = new KontekstBezpieczenstwa();
   }
+
   
-  /**
-   * Zwraca true jeśli login i haslo poprawne, false w przeciwnym wypadku.
-   * @param login
-   * @param haslo
-   * @return
-   */
   public KontekstBezpieczenstwa zaloguj(String login, String haslo) {
-    String sql = "SELECT LOGN, HASL, UPRW FROM URZ WHERE LOGN = ?";
+    String sql = "SELECT LOGN, HASL, UPRW, NLEK, NPCJ FROM URZ WHERE LOGN = ?";
     PreparedStatement query = sqlManager.createQuery(sql);
     try {
       query.setString(1, login);
@@ -42,7 +37,7 @@ public class LoginImpl {
         e.printStackTrace();
       }
       if (poprawneHaslo) {
-        return KontekstBezpieczenstwa.setZalogowany(rs.get("LOGN").toString(), rs.get("UPRW").toString());
+        return KontekstBezpieczenstwa.setZalogowany(rs.get("LOGN").toString(), rs.get("UPRW").toString(), (Long) rs.get("NLEK"), (Long) rs.get("NPCJ"));
       }
     }
    

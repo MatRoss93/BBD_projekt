@@ -1,6 +1,6 @@
 package bbd.projekt.utils;
 
-public enum Uprawnienia {
+public enum UprawnieniaEnum {
   ADMINISTRATOR,
   LEKARZ,
   RECEPCJA,

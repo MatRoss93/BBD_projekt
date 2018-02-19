@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>BBD_DB</name><driver>org.mariadb.jdbc.Driver</driver><username>25678166_0000001</username><password>Monocentropus1</password><savePassword>true</savePassword><url>jdbc:mariadb://serwer1796722.home.pl/25678166_0000001</url><database></database><serverAddress></serverAddress><classpath>C:\Users\Wojciech Serafin\Desktop\MySQL_Driver</classpath></jdbcDataAdapter>

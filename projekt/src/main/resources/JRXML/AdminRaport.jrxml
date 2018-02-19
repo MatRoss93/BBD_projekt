@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AdminRaport" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78ef2e5d-efab-4ad8-9f7b-d275b65fde04">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="src\main\resources\JRXML\BBD_DB.xml"/>
+	<parameter name="przychodnia" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[$P{REPORT_CONTEXT}.getParameterValue( "przychodnia" )]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT DISTINCT L.NLEK idLekarza, 
+           S.SPEC specjalizacja, 
+           L.IMIE imie, 
+           L.NAZW nazwisko, 
+           U.LOGN login, 
+          (SELECT COUNT(1) 
+             FROM GRF G 
+            WHERE G.NLEK = L.NLEK
+              AND DATE(G.DTOD) = DATE(NOW())) iloscWizyt 
+      FROM LEK L
+INNER JOIN SPC S ON L.NSPC = S.NSPC
+INNER JOIN URZ U ON L.NLEK = U.NLEK
+INNER JOIN GRF G ON L.NLEK = G.NLEK
+     WHERE $X{EQUAL, G.NPRZ, przychodnia}
+  ORDER BY iloscWizyt DESC]]>
+	</queryString>
+	<field name="idLekarza" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="idLekarza"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="LEK"/>
+	</field>
+	<field name="specjalizacja" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="specjalizacja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="SPC"/>
+	</field>
+	<field name="imie" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="imie"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="LEK"/>
+	</field>
+	<field name="nazwisko" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nazwisko"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="LEK"/>
+	</field>
+	<field name="login" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="login"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="URZ"/>
+	</field>
+	<field name="iloscWizyt" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="iloscWizyt"/>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{specjalizacja}]]></groupExpression>
+		<groupHeader>
+			<band height="33">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="c27f6186-addc-4eac-afe5-d629353cc988"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[specjalizacja]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="100" y="0" width="455" height="32" forecolor="#006699" backcolor="#E6E6E6" uuid="be5b4a99-d50d-4760-aeb7-f5c0cec00ad4"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{specjalizacja}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="23a46393-6f2e-43f6-89bc-5b97b47631b7"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="5a4abc2d-4645-42f2-b485-00da2013a832"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="f6b79d58-1082-47df-8b50-fe5c5b723af1"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Raport Wizyt]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="230" y="60" width="355" height="20" forecolor="#FFFFFF" uuid="d25d0bc2-f2dd-41c5-b96a-6a1cfe2578f2"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Raport przeprowadzonych dzisiaj wizyt]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="9f16a46c-f789-4f72-aeba-f914854910a8"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c9c13379-87e4-46cb-9e7e-3a55ff5482d7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7edaadea-d826-4ec5-9b6a-907c8ab4c07e"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[idLekarza]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="111" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ce3f16b4-0424-41ad-8115-a9f10dce3915">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="89378df1-c32c-4da7-8c96-1084dbc96e4e"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[imie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="222" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d5643ed0-cd1c-45af-8ac1-002f0953bb77">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="66bd1894-bcce-4abe-99e4-7d87434f642b"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[nazwisko]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="333" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b243bdba-437b-4f88-b4ae-cb99a068e966">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="af15a191-d7b8-49f6-a9db-1112bfd0f63a"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[login]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="444" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="59513d92-63c7-4bff-93c6-8f3c69e8f46c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a6ef6424-b2bb-4609-9c52-1d6935c502fc"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[iloscWizyt]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="d47ca8ad-afbf-4558-afbb-3e6dcc77b8ed"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="111" height="20" uuid="3f6e9dbd-bc00-4cf4-8100-2bcd2c06e193">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7edaadea-d826-4ec5-9b6a-907c8ab4c07e"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idLekarza}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="111" y="0" width="111" height="20" uuid="d52796cc-d80a-4ed3-8e6d-ffa5041434a4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="89378df1-c32c-4da7-8c96-1084dbc96e4e"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{imie}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="222" y="0" width="111" height="20" uuid="c1c721d7-fd48-4614-89d3-9bc5d49574fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="66bd1894-bcce-4abe-99e4-7d87434f642b"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nazwisko}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="333" y="0" width="111" height="20" uuid="45ae1901-9ad5-4df8-bd54-60f4feea73b7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="af15a191-d7b8-49f6-a9db-1112bfd0f63a"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="444" y="0" width="111" height="20" uuid="0e657a5e-416b-4bfd-a019-fb458d2f9417">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a6ef6424-b2bb-4609-9c52-1d6935c502fc"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iloscWizyt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="9a1309d3-7ce2-4105-8ccc-e90d393b40af"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="52ae1024-7f51-46c1-b012-6d3c95c375b8"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="1dfdcdd2-886d-473d-a628-984aabcd3997"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

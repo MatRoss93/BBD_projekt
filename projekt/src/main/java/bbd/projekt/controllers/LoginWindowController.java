@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import bbd.projekt.implementation.LoginImpl;
 import bbd.projekt.utils.FxmlUtils;
 import bbd.projekt.utils.KontekstBezpieczenstwa;
-import bbd.projekt.utils.Uprawnienia;
+import bbd.projekt.utils.UprawnieniaEnum;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -14,6 +14,8 @@ public class LoginWindowController {
   private static final String TWORZENIE_KONTA_WINDOW_FXML = "/FXML/TworzenieKontaWindow.fxml";
   private static final String MAIN_WINDOW_FXML = "/FXML/MainWindow.fxml";
   private static final String LEKARZ_WINDOW_FXML = "/FXML/LekarzWindow.fxml";
+  private static final String ADMIN_WINDOW_FXML = "/FXML/AdminWindow.fxml";
+  private static final String FORMULARZ_LEKARZA_FXML = "/FXML/FormularzLekarza.fxml";
   private StartWindowController startWindowController;
   private KontekstBezpieczenstwa kontekstBezpieczenstwa;
   private LoginImpl loginClient;
@@ -43,11 +45,22 @@ public class LoginWindowController {
       MainWindowController mainWindowController = (MainWindowController) FxmlUtils.getController(MAIN_WINDOW_FXML, startWindowController.startPane);
       mainWindowController.setStartWindowController(startWindowController); 
       mainWindowController.setKontekstBezpieczenstwa(kontekstBezpieczenstwa);
-      if (kontekstBezpieczenstwa.getUprawnienia() == Uprawnienia.LEKARZ) {
+      if (kontekstBezpieczenstwa.getUprawnienia() == UprawnieniaEnum.LEKARZ) {
+        if (kontekstBezpieczenstwa.getIdLekarza() != null) {
         LekarzWindowController lekarzController = (LekarzWindowController) FxmlUtils.getController(LEKARZ_WINDOW_FXML, mainWindowController.applicationPane);
         lekarzController.setKontekstBezpieczenstwa(kontekstBezpieczenstwa);
         lekarzController.setMainWindowController(mainWindowController);
         lekarzController.pobierzPacjentow();
+        } else {
+          FormularzLekarzaController FLController = (FormularzLekarzaController) FxmlUtils.getController(FORMULARZ_LEKARZA_FXML, mainWindowController.applicationPane);
+          FLController.setStartWindowController(startWindowController);
+          FLController.setKontekstBezpieczenstwa(kontekstBezpieczenstwa);
+        }
+      } else if (kontekstBezpieczenstwa.getUprawnienia() == UprawnieniaEnum.ADMINISTRATOR) {
+        AdminWindowController adminController = (AdminWindowController) FxmlUtils.getController(ADMIN_WINDOW_FXML, mainWindowController.applicationPane);
+        adminController.setKontekstBezpieczenstwa(kontekstBezpieczenstwa);
+        adminController.setMainWindowController(mainWindowController);
+        adminController.setStartWindowController(startWindowController);
       }
     } else {
       JOptionPane.showMessageDialog(null, FxmlUtils.getString("logowanie.blad.niepoprawne"));

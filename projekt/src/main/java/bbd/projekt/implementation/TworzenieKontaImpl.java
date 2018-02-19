@@ -28,7 +28,7 @@ public class TworzenieKontaImpl {
     sqlManager = new SqlManager();
   }
   
-  public List<String> utworzKonto(String login, String haslo, String haslo2) {
+  public List<String> utworzKonto(String login, String haslo, String haslo2, String uprawnienia) {
     List<String> listaBledow = new ArrayList<String>();
     if (login.equals(null) || 
         login.length() < 5 || 
@@ -62,7 +62,7 @@ public class TworzenieKontaImpl {
       } catch (CannotPerformOperationException e) {
 		e.printStackTrace();
       }
-      dodajUrzytkownika(login,haslo,null,null,"P");
+      dodajUrzytkownika(login,haslo,null,null,uprawnienia);
     } else {
     	String listString = "";
     	for (String s : listaBledow) {

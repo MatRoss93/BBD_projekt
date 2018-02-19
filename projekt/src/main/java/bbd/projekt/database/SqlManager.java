@@ -11,6 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+
 
 public class SqlManager {
   private static final String URL = "jdbc:mysql://serwer1796722.home.pl/25678166_0000001?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET";
@@ -102,5 +107,18 @@ public class SqlManager {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+  }
+  public JasperPrint fillReport(JasperReport jr, HashMap<String,Object> parametry) throws JRException {
+    JasperPrint jp = null;
+    try {
+      if (connection == null || connection.isClosed()) {
+        connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+      }
+      jp = JasperFillManager.fillReport(jr, parametry, connection);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    
+    return jp;
   }
 }
