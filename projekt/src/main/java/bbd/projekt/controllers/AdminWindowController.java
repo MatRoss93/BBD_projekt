@@ -2,6 +2,8 @@ package bbd.projekt.controllers;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import bbd.projekt.implementation.AdminImpl;
 import bbd.projekt.interfaces.Lekarz;
 import bbd.projekt.interfaces.Przychodnia;
@@ -83,18 +85,21 @@ public class AdminWindowController {
   }
   @FXML
   public void wybierzPoradnie() {
-    uzupelnijLekarzy(listaPrzychodni.getValue().getId());
-    listaLekarzy.setDisable(false);
-    if (listaLekarzy.getItems().isEmpty()) {
-      generujRaport.setDisable(true);
+    if (listaPrzychodni.getValue() == null || listaPrzychodni.getValue().getId() == null) {
+      JOptionPane.showMessageDialog(null, FxmlUtils.getString("admin.najpierw.wybierz.przychodnie"));
     } else {
-      generujRaport.setDisable(false);
+      uzupelnijLekarzy(listaPrzychodni.getValue().getId());
+      listaLekarzy.setDisable(false);
+      if (listaLekarzy.getItems().isEmpty()) {
+        generujRaport.setDisable(true);
+      } else {
+        generujRaport.setDisable(false);
+      }
     }
-    
   }
   @FXML
   public void generujRaport() {
-    adminClient.przygotujRaport(listaPrzychodni.getValue().getId());
+    adminClient.przygotujRaport(listaPrzychodni.getValue());
   }
   public void setMainWindowController(MainWindowController mainWindowController) {
     this.mainWindowController = mainWindowController;

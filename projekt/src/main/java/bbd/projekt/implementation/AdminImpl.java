@@ -13,9 +13,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 import bbd.projekt.database.SqlManager;
 import bbd.projekt.interfaces.Lekarz;
 import bbd.projekt.interfaces.Przychodnia;
+import bbd.projekt.utils.FxmlUtils;
 import bbd.projekt.utils.KontekstBezpieczenstwa;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -104,23 +108,28 @@ public class AdminImpl {
     return listaLekarzy;
   }
   
-  public void przygotujRaport(Long przychodnia) {
+  public void przygotujRaport(Przychodnia przychodnia) {
    try {
     String qn = "./src/main/resources/JRXML/AdminRaport.jrxml";
-    FileInputStream input = new FileInputStream(new File(qn));
-    //System.out.println(input.toString());
     JasperDesign jd = JRXmlLoader.load(new FileInputStream(new File(qn)));
     JasperReport jr = JasperCompileManager.compileReport(jd);
-    //JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(qn);
     HashMap<String,Object> parametry = new HashMap<String, Object>();
-    parametry.put("przychodnia", przychodnia);
+    parametry.put("przychodnia", przychodnia.getId());
     JasperPrint jp = sqlManager.fillReport(jr, parametry);
-    //JasperViewer jv = new JasperViewer(jp);
-    //jv.setVisible(true);
-    OutputStream output = new FileOutputStream(new File("C:\\Users\\Wojciech Serafin\\Desktop\\JasperReport.pdf")); 
-    JasperExportManager.exportReportToPdfStream(jp, output); 
-    output.flush();
-    output.close();
+    
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setSelectedFile(new File(przychodnia.getNazwa() +".pdf"));
+    if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+      File file = fileChooser.getSelectedFile();
+      // save to file
+      OutputStream output = new FileOutputStream(file);
+      JasperExportManager.exportReportToPdfStream(jp, output); 
+      output.flush();
+      output.close();
+      JOptionPane.showMessageDialog(null, FxmlUtils.getString("admin.raport.zapisany"));
+    }
+   
+    
    } catch (JRException e) {
     // TODO Auto-generated catch block
     e.printStackTrace();
