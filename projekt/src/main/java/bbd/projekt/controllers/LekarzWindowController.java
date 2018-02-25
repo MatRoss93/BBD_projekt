@@ -3,12 +3,15 @@ package bbd.projekt.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import bbd.projekt.implementation.LekarzImpl;
 import bbd.projekt.interfaces.Badanie;
 import bbd.projekt.interfaces.Leki;
 import bbd.projekt.interfaces.Skierowanie;
 import bbd.projekt.interfaces.Specjalista;
 import bbd.projekt.interfaces.Termin;
+import bbd.projekt.utils.FxmlUtils;
 import bbd.projekt.utils.KontekstBezpieczenstwa;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -181,16 +184,21 @@ public class LekarzWindowController {
   
   @FXML
   public void dodajDoRecepty() {
-    recepta.getItems().add(lekList.getValue().getNazwaLeku());
-    if (receptaDoBazy == null) {
-      receptaDoBazy = new ArrayList<Leki>();
+    if (lekList.getValue() != null) {
+      recepta.getItems().add(lekList.getValue().getNazwaLeku());
+      if (receptaDoBazy == null) {
+        receptaDoBazy = new ArrayList<Leki>();
+      }
+      receptaDoBazy.add(lekList.getValue());
     }
-    receptaDoBazy.add(lekList.getValue());
   }
   
   @FXML
   public void zatwierdzRecepte() {
-    lekarzClient.dodajRecepteDoBazy(receptaDoBazy, listaPacjentow.getValue());
+    if (listaPacjentow.getValue() != null) {
+      lekarzClient.dodajRecepteDoBazy(receptaDoBazy, listaPacjentow.getValue());
+      JOptionPane.showMessageDialog(null, FxmlUtils.getString("lekarz.dodano.do.bazy.recepta"));
+    }
   }
   
   
@@ -214,29 +222,36 @@ public class LekarzWindowController {
   
   @FXML
   public void dodajSpecDoSkierowania() {
-    skierowanie.getItems().add(specjalistaList.getValue().getNazwaSpecjalisty());
-    if (skierowanieDoBazy == null) {
-      skierowanieDoBazy = new ArrayList<Skierowanie>();
+    if (specjalistaList.getValue() != null) {
+      skierowanie.getItems().add(specjalistaList.getValue().getNazwaSpecjalisty());
+      if (skierowanieDoBazy == null) {
+        skierowanieDoBazy = new ArrayList<Skierowanie>();
+      }
+      Skierowanie s = new Skierowanie();
+      s.setIdSpecjalisty(specjalistaList.getValue().getIdSpecjalisty());
+      skierowanieDoBazy.add(s);
     }
-    Skierowanie s = new Skierowanie();
-    s.setIdSpecjalisty(specjalistaList.getValue().getIdSpecjalisty());
-    skierowanieDoBazy.add(s);
   }
   
   @FXML
   public void dodajBadDoSkierowania() {
-    skierowanie.getItems().add(badanieList.getValue().getNazwaBadania());
-    if (skierowanieDoBazy == null) {
-      skierowanieDoBazy = new ArrayList<Skierowanie>();
+    if (badanieList.getValue() != null) {
+      skierowanie.getItems().add(badanieList.getValue().getNazwaBadania());
+      if (skierowanieDoBazy == null) {
+        skierowanieDoBazy = new ArrayList<Skierowanie>();
+      }
+      Skierowanie s = new Skierowanie();
+      s.setIdBadania(badanieList.getValue().getIdBadania());
+      skierowanieDoBazy.add(s);
     }
-    Skierowanie s = new Skierowanie();
-    s.setIdBadania(badanieList.getValue().getIdBadania());
-    skierowanieDoBazy.add(s);
   }
   
   @FXML
   public void zatwierdzSkierowanie() {
-    lekarzClient.dodajSkierowanieDoBazy(skierowanieDoBazy, listaPacjentow.getValue());
+    if (listaPacjentow.getValue() != null) {
+      lekarzClient.dodajSkierowanieDoBazy(skierowanieDoBazy, listaPacjentow.getValue());
+      JOptionPane.showMessageDialog(null, FxmlUtils.getString("lekarz.dodano.do.bazy.skierowanie"));
+    }
   }
   
 }
