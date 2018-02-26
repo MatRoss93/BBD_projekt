@@ -16,6 +16,7 @@ public class LoginWindowController {
   private static final String LEKARZ_WINDOW_FXML = "/FXML/LekarzWindow.fxml";
   private static final String ADMIN_WINDOW_FXML = "/FXML/AdminWindow.fxml";
   private static final String FORMULARZ_LEKARZA_FXML = "/FXML/FormularzLekarza.fxml";
+  private static final String RECEPCJA_WINDOW_FXML = "/FXML/RecepcjaWindow.fxml";
   private StartWindowController startWindowController;
   private KontekstBezpieczenstwa kontekstBezpieczenstwa;
   private LoginImpl loginClient;
@@ -61,6 +62,15 @@ public class LoginWindowController {
         adminController.setKontekstBezpieczenstwa(kontekstBezpieczenstwa);
         adminController.setMainWindowController(mainWindowController);
         adminController.setStartWindowController(startWindowController);
+      } else if (kontekstBezpieczenstwa.getUprawnienia() == UprawnieniaEnum.RECEPCJA) {
+    	  RecepcjaWindowController recepcjaController = (RecepcjaWindowController) FxmlUtils.getController(RECEPCJA_WINDOW_FXML, mainWindowController.applicationPane);
+    	  recepcjaController.setKontekstBezpieczenstwa(kontekstBezpieczenstwa);
+    	  recepcjaController.setMainWindowController(mainWindowController);
+    	  recepcjaController.wybierzMiasto();
+    	  recepcjaController.wybierzWojewodztwo();
+    	  recepcjaController.wypiszLekarzy();
+    	  recepcjaController.wybierzPrzychodnie();
+    	  recepcjaController.wybierzPacjenta();
       }
     } else {
       JOptionPane.showMessageDialog(null, FxmlUtils.getString("logowanie.blad.niepoprawne"));

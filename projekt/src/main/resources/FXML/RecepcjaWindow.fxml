@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bbd.projekt.controllers.RecepcjaWindowController">
+   <children>
+      <TabPane prefHeight="395.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="%recepcja.grafik">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="357.0" prefWidth="600.0">
+                     <children>
+                        <VBox prefHeight="324.0" prefWidth="560.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="544.0" spacing="10.0">
+                                 <children>
+                                    <Label prefWidth="70.0" text="%recepcja.grafik.listaP" />
+                                    <ComboBox fx:id="listaPrzychodni" prefHeight="25.0" prefWidth="350.0" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="50.0" prefWidth="560.0" spacing="10.0">
+                                 <children>
+                                    <Label text="%recepcja.grafik.data" />
+                                    <DatePicker fx:id="dataWizyty" />
+                                    <Label text="%recepcja.grafik.godzina" />
+                                    <TextField fx:id="godzinaOd" prefHeight="25.0" prefWidth="30.0" />
+                                    <Label text="do" />
+                                    <TextField fx:id="godzinaDo" prefHeight="25.0" prefWidth="30.0" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="544.0" spacing="10.0">
+                                 <children>
+                                    <Label prefWidth="70.0" text="%recepcja.grafik.listaPac" />
+                                    <ComboBox fx:id="listaPacjentow" prefHeight="27.0" prefWidth="200.0" />
+                                    <Label prefHeight="17.0" prefWidth="50.0" text="%recepcja.grafik.lekarz" />
+                                    <ComboBox fx:id="listaLekarzy" prefHeight="25.0" prefWidth="200.0" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                 </padding>
+                                 <opaqueInsets>
+                                    <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                 </opaqueInsets>
+                              </HBox>
+                              <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#dodajDoGrafiku" text="%recepcja.grafik.przycisk">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="%recepcja.npacjent">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="14.0" layoutY="14.0" prefHeight="193.0" prefWidth="573.0">
+                           <children>
+                              <VBox prefHeight="193.0" prefWidth="109.0">
+                                 <children>
+                                    <Label prefHeight="21.0" prefWidth="66.0" text="%recepcja.pacjent.imie">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="%recepcja.pacjent.nazwisko">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="9.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="%recepcja.pacjent.wojew">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="9.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="%recepcja.pacjent.miasto">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="9.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="%recepcja.pacjent.tel">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="9.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="%recepcja.pacjent.ulica">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="9.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Button mnemonicParsing="false" onAction="#pacjentDoBazy" text="%recepcja.pacjent.dodaj">
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <TextField fx:id="imie">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <TextField fx:id="nazwisko">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <ComboBox fx:id="wybWojew" prefWidth="150.0">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                    <ComboBox fx:id="wybMiasto" prefWidth="150.0">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                    <TextField fx:id="tel">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <TextField fx:id="ulica">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                           </opaqueInsets>
+                        </HBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
