@@ -44,11 +44,12 @@ public class FxmlUtils {
     Pane pane = null;
     try {
       pane = loader.load();
+      startPane.getChildren().clear();
+      startPane.getChildren().add(pane);
     } catch (Exception e) {
       e.printStackTrace();
     }
-    startPane.getChildren().clear();
-    startPane.getChildren().add(pane);
+    
     return loader.getController();
   }
   

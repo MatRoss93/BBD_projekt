@@ -109,9 +109,8 @@ public class AdminImpl {
   }
   
   public void przygotujRaport(Przychodnia przychodnia) {
-   try {
-    String qn = "./src/main/resources/JRXML/AdminRaport.jrxml";
-    JasperDesign jd = JRXmlLoader.load(new FileInputStream(new File(qn)));
+   try {    
+    JasperDesign jd = JRXmlLoader.load(FxmlUtils.class.getResourceAsStream("/JRXML/AdminRaport.jrxml"));
     JasperReport jr = JasperCompileManager.compileReport(jd);
     HashMap<String,Object> parametry = new HashMap<String, Object>();
     parametry.put("przychodnia", przychodnia.getId());
