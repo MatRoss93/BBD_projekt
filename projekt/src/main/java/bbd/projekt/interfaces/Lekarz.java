@@ -6,7 +6,17 @@ public class Lekarz {
   private String imie;
   private String nazwisko;
   private Long idUrzytkownika;
+  private String imienazwisko;
   
+  public Lekarz(Long id, String im, String nazw, String imNazw)
+  {
+	  this.idLekarza = id;
+	  this.imie= im;
+	  this.nazwisko = nazw;
+	  this.imienazwisko = imNazw;
+  }
+  
+  public Lekarz(){}
   public Long getIdLekarza() {
     return idLekarza;
   }
@@ -37,4 +47,11 @@ public class Lekarz {
   public void setIdUrzytkownika(Long idUrzytkownika) {
     this.idUrzytkownika = idUrzytkownika;
   }
+  public String getImienazwisko() {
+	  return imienazwisko;
+  }
+  public void setImienazwisko(String imienazwisko) {
+	  this.imienazwisko = imienazwisko;
+  }
+  
 }
