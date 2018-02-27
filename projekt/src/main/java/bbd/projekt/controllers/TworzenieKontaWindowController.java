@@ -5,7 +5,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import bbd.projekt.implementation.TworzenieKontaImpl;
-import bbd.projekt.interfaces.Leki;
 import bbd.projekt.interfaces.Uprawnienia;
 import bbd.projekt.utils.FxmlUtils;
 import bbd.projekt.utils.KontekstBezpieczenstwa;
@@ -14,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 
