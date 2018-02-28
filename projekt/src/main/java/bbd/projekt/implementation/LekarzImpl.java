@@ -37,7 +37,8 @@ public class LekarzImpl {
         "                WHERE LOGN = ?) " +
         "   AND G.AKTW = 'T' " +
         "   AND P.AKTW = 'T' " +
-        "   AND DATE(G.DTOD) = DATE(current_timestamp) ";
+        "   AND DATE(G.DTOD) = DATE(current_timestamp) " +
+        " ORDER BY G.DTOD ";
     
     PreparedStatement query = sqlManager.createQuery(sql);
     try {
@@ -61,7 +62,7 @@ public class LekarzImpl {
       termin.setImie(pacjent.get("IMIE").toString());
       termin.setNazwisko(pacjent.get("NAZW").toString());
       termin.setTelefon((Integer)pacjent.get("NUMT"));
-      termin.setDanePacjenta(pacjent.get("IMIE").toString() + " " + pacjent.get("NAZW").toString() + ", tel." + pacjent.get("NUMT").toString());
+      termin.setDanePacjenta(pacjent.get("IMIE").toString() + " " + pacjent.get("NAZW").toString() + ", term." + pacjent.get("DTOD").toString());
       terminy.add(termin);
     }
     

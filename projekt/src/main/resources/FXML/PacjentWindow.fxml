@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bbd.projekt.controllers.PacjentWindowController">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="twTab" text="%pacjent.termin.wizyty">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="twTableView" layoutX="16.0" layoutY="85.0" prefHeight="200.0" prefWidth="568.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                           <columns>
+                              <TableColumn fx:id="dataTableColumn" prefWidth="75.0" text="%pacjent.data" />
+                              <TableColumn fx:id="godzTableColumn" prefWidth="75.0" text="%pacjent.godzina" />
+                              <TableColumn fx:id="przyTableColumn" prefWidth="75.0" text="%pacjent.przychodnia" />
+                              <TableColumn fx:id="lekTableColumn" prefWidth="75.0" text="%pacjent.lekarz" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <opaqueInsets>
+                              <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </padding>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="recTab" text="%pacjent.recepty">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="recTableView" layoutX="21.0" layoutY="85.0" prefHeight="200.0" prefWidth="557.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                           <columns>
+                              <TableColumn fx:id="datawystTableColumn" prefWidth="75.0" text="%pacjent.data.wystawienia" />
+                              <TableColumn fx:id="datawazTableColumn" prefWidth="75.0" text="%pacjent.data.waznosci" />
+                              <TableColumn fx:id="nlekuTableColumn" prefWidth="75.0" text="%pacjent.nazwa.leku" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <opaqueInsets>
+                              <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </padding>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="skTab" text="%pacjent.skierowania">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="scTableView" layoutX="131.0" layoutY="85.0" prefHeight="200.0" prefWidth="338.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                           <columns>
+                              <TableColumn fx:id="skiTableColumn" prefWidth="75.0" text="%pacjent.skierowania" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <opaqueInsets>
+                              <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </padding>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</StackPane>

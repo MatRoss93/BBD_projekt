@@ -210,7 +210,7 @@ public class RecepcjaWindowController {
 	public void dodajDoGrafiku() {
 		
 		recepcjaClient.dodajDoGrafiku(listaPacjentow.getValue(), listaLekarzy.getValue(), listaPrzychodni.getValue(), godzinaOd.getText(), godzinaDo.getText(),dataWizyty.getValue());
-		godzinaDo.clear();
+		godzinaOd.clear();
 		godzinaDo.clear();
 	}
 	

@@ -2,7 +2,7 @@ package bbd.projekt.interfaces;
 
 public class Pacjent {
 	
-	private Integer idPacjenta;
+	private Long idPacjenta;
 	private String imie;
 	private String nazwisko;
 	private Integer idMiasta;
@@ -11,10 +11,10 @@ public class Pacjent {
 	private String ulica;
 	
 	
-	public Integer getIdPacjenta() {
+	public Long getIdPacjenta() {
 		return idPacjenta;
 	}
-	public void setIdPacjenta(Integer idPacjenta) {
+	public void setIdPacjenta(Long idPacjenta) {
 		this.idPacjenta = idPacjenta;
 	}
 	public String getImie() {

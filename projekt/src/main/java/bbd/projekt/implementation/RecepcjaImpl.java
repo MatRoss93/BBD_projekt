@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.exolab.castor.types.DateTime;
 
 import bbd.projekt.database.SqlManager;
@@ -16,6 +18,7 @@ import bbd.projekt.interfaces.Miasto;
 import bbd.projekt.interfaces.Pacjent;
 import bbd.projekt.interfaces.Przychodnia;
 import bbd.projekt.interfaces.Wojew;
+import bbd.projekt.utils.FxmlUtils;
 
 
 public class RecepcjaImpl {
@@ -57,6 +60,7 @@ public class RecepcjaImpl {
 		Pacjent p = null;
 		for (Map<String,Object> pacj : pacjent) {
 			p = new Pacjent();
+			p.setIdPacjenta((Long)pacj.get("NPCJ"));
 		    p.setImie(pacj.get("IMIE").toString());
 		    p.setNazwisko(pacj.get("NAZW").toString());
 		    listaPacjentow.add(p);
@@ -131,9 +135,24 @@ public class RecepcjaImpl {
 		//String data = dataWizyty.getValue().format(DateTimeFormatter.ofPattern("yyyy-mm-dd"));
 		//String terminOd = dataWizyty+" "+godzinaOd;
 		//String terminDo = data+" "+godzinaDo;
+	    PreparedStatement query;
+	  
+	    String sql = "SELECT count(1) lTerminow FROM GRF WHERE DTOD = ? AND NLEK = ?";
+	    try {
+	        query = sqlManager.createQuery(sql);
+	        query.setString(1, (localDate +" "+ godzinaOd).toString());
+	        query.setLong(2, lekarz.getIdLekarza());
+	        Map<String, Object> czyTerminy = sqlManager.getSingleResult(query);
+	        if ((Long) czyTerminy.get("lTerminow") != 0) {
+	            JOptionPane.showMessageDialog(null, FxmlUtils.getString("recepcja.termin.zajety"));
+	            return;
+	        }
+	    } catch (SQLException e1) {
+        // TODO Auto-generated catch block
+          e1.printStackTrace();
+        }
+		sql = "INSERT INTO GRF(NPCJ, NLEK, NPRZ, DTOD, DTDO) VALUES(?,?,?,?,?)";
 		
-		String sql = "INSERT INTO GRF(NPCJ, NLEK, NPRZ, DTOD, DTDO) VALUES(?,?,?,?,?)";
-		PreparedStatement query;
 		try {
 			
 			query = sqlManager.createQuery(sql);
@@ -142,7 +161,8 @@ public class RecepcjaImpl {
 			query.setLong(3, przychodnia.getId());
 			query.setString(4, (localDate +" "+ godzinaOd).toString());
 			query.setString(5, (localDate +" "+ godzinaDo).toString());
-			
+		    query.executeUpdate();
+		    JOptionPane.showMessageDialog(null, FxmlUtils.getString("recepcja.dodano.termin"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

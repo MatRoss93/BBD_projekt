@@ -3,6 +3,7 @@ package bbd.projekt.interfaces;
 public class Skierowanie {
   Integer idSpecjalisty;
   Integer idBadania;
+  String nazwa;
   
   public Integer getIdSpecjalisty() {
     return idSpecjalisty;
@@ -15,5 +16,11 @@ public class Skierowanie {
   }
   public void setIdBadania(Integer idBadania) {
     this.idBadania = idBadania;
+  }
+  public String getNazwa() {
+    return nazwa;
+  }
+  public void setNazwa(String nazwa) {
+    this.nazwa = nazwa;
   }
 }
