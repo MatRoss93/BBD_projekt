@@ -1,5 +1,6 @@
 package bbd.projekt.controllers;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -37,6 +38,8 @@ public class RecepcjaWindowController {
 	TextField ulica;
 	@FXML
 	DatePicker dataWizyty;
+	@FXML
+	TextField login;
 	@FXML 
 	ComboBox<Miasto> wybMiasto;
 	@FXML 
@@ -200,16 +203,17 @@ public class RecepcjaWindowController {
 	
 	public void pacjentDoBazy() {
 		
-		recepcjaClient.dodajPacjenta(imie.getText(),nazwisko.getText(),wybMiasto.getValue(),wybWojew.getValue(),ulica.getText(), Integer.parseInt(tel.getText()));
+		recepcjaClient.dodajPacjenta(imie.getText(),nazwisko.getText(),wybMiasto.getValue(),wybWojew.getValue(),ulica.getText(), Integer.parseInt(tel.getText()), login.getText());
 		imie.clear();
 		nazwisko.clear();
 		ulica.clear();
 		tel.clear();
+		login.clear();
 	}
 	
 	public void dodajDoGrafiku() {
 		
-		recepcjaClient.dodajDoGrafiku(listaPacjentow.getValue(), listaLekarzy.getValue(), listaPrzychodni.getValue(), godzinaOd.getText(), godzinaDo.getText(),dataWizyty.getValue());
+		recepcjaClient.dodajDoGrafiku(listaPacjentow.getValue(), listaLekarzy.getValue(), listaPrzychodni.getValue(), godzinaOd.getText(), godzinaDo.getText(),(Date) dataWizyty.getUserData());
 		godzinaDo.clear();
 		godzinaDo.clear();
 	}
